@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Java Rookie — Apprendre Java pas à pas, en partant de zéro</title>
+<meta name="description" content="Un parcours de petites leçons pour apprendre Java en partant de zéro : exemples courts, illustrations, questions rapides et corrections. Accompagne le cours de POO Java de l'ESP-UCAD.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip" href="#principal">Aller au contenu</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="marque" href="index.html"><span class="marque-puce"></span>Java <span class="pas">Rookie</span></a>
+    <button class="menu-btn" aria-expanded="false" aria-label="Ouvrir le menu">Menu</button>
+    <nav class="nav-liens" aria-label="Navigation principale">
+      <a href="index.html" aria-current="page">Parcours</a>
+      <a href="lexique.html">Lexique</a>
+      <a href="index.html#le-cours">Le cours</a>
+    </nav>
+  </div>
+</header>
+
+<main id="principal">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tag">Débutant absolu · aucun prérequis en Java</span>
+      <h1>Apprendre Java, une petite leçon à la fois.</h1>
+      <p class="accroche">Environ 3 h au total, en 27 petites leçons de 7 minutes. Une seule idée à chaque fois. Des exemples de quelques lignes, des dessins pour comprendre, et une question rapide pour vérifier que c'est acquis.</p>
+      <div class="cta-row">
+        <a class="bouton" id="reprendre" href="lecon.html">Commencer la première leçon</a>
+        <a class="bouton fantome" href="#parcours-titre">Voir le parcours</a>
+      </div>
+      <div id="progres-global" class="progres-global"></div>
+    </div>
+    <figure class="illus hero-illus" aria-label="Une variable dessinée comme une boîte étiquetée">
+      <pre class="ascii">   étiquette          contenu
+      │                 │
+      ▼                 ▼
+   ┌─────┐       ┌───────────┐
+   │ age │ ────▶ │    20     │
+   └─────┘       └───────────┘</pre>
+      <figure class="code"><pre><code class="java"><span class="ln"><span class="kw">int</span> age = <span class="num">20</span>;</span><span class="ln"><span class="ty">System</span>.out.<span class="fn">println</span>(age);</span></code></pre></figure>
+      <div class="console" data-etiquette="Ce qui s'affiche">20</div>
+      <figcaption>D'abord l'image, ensuite le code. C'est la règle de chaque leçon.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="wrap accueil">
+  <h2>Comment ça marche</h2>
+  <div class="grille">
+    <div class="info-carte"><div class="t">1 · Petites leçons</div><p>Chaque leçon tient en quelques minutes. Tu peux t'arrêter après n'importe laquelle : ta progression est gardée.</p></div>
+    <div class="info-carte"><div class="t">2 · Voir, puis coder</div><p>Une image mentale, puis un exemple très court, décortiqué ligne par ligne si besoin. Et l'option <strong>« Explique-moi simplement »</strong> quand une notion résiste.</p></div>
+    <div class="info-carte"><div class="t">3 · Te tester tout de suite</div><p>« Que va afficher ce code ? », « Où est l'erreur ? » : tu vérifies ta compréhension à chaque étape, sans attendre la fin.</p></div>
+  </div>
+
+  <section id="a-revoir" class="a-revoir" hidden></section>
+
+  <h2 id="parcours-titre">Le parcours</h2>
+  <p class="mut">Suis les modules dans l'ordre : chaque notion arrive au moment où tu en as besoin.</p>
+  <div id="parcours" class="parcours-liste"></div>
+
+  <h2 id="le-cours">Le cours officiel</h2>
+  <p>Ce site accompagne le cours <strong>« Programmation orientée-objet : Java »</strong> du <strong>Pr. Samba DIAW</strong> (Département Génie Informatique, ESP-UCAD). Il en reprend le vocabulaire et les exemples, et se concentre sur <strong>les bases</strong> : de ton premier programme jusqu'aux premiers objets.</p>
+  <div class="grille">
+    <div class="info-carte"><div class="t">L'ordre</div><p>Il diffère un peu de celui des slides : on construit d'abord des bases solides (variables, conditions, boucles, méthodes), puis on passe aux objets, quand tu as du code pour les comprendre.</p></div>
+    <div class="info-carte"><div class="t">Les précisions</div><p>Quand un support contient une imprécision, la leçon le signale dans un encadré <strong>« Précision sur le support du cours »</strong>, pour que tu ne sois pas piégé.</p></div>
+    <div class="info-carte"><div class="t">Juste les bases</div><p>Ce n'est pas un cours complet. Tableaux, chaînes, exceptions, interfaces ou JDBC sont présentés comme « la suite » à la fin du parcours : compare avec tes notes de cours.</p></div>
+  </div>
+  <p class="mut">Tu viens d'<a href="../algo-rookie/index.html">Algo Rookie</a> ? Bonne nouvelle : les idées sont les mêmes, seule la façon de les écrire change.</p>
+</div>
+</main>
+
+<footer class="pied">
+  <div class="pied-inner">
+    <div><strong>Java Rookie</strong> · Accompagne le cours « Programmation orientée-objet : Java » du Pr. Samba DIAW<br>Département Génie Informatique, ESP-UCAD, Dakar.</div>
+    <div><a href="index.html">Parcours</a> · <a href="lexique.html">Lexique</a><br><span class="mut">Ta progression est enregistrée dans ce navigateur.</span></div>
+  </div>
+</footer>
+<script src="assets/js/noyau.js"></script>
+<script src="assets/js/blocs.js"></script>
+<script src="assets/js/exercices.js"></script>
+<script src="assets/js/pages.js"></script>
+<script src="courses/manifest.js"></script>
+</body>
+</html>
