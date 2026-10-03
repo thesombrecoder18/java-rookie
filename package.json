@@ -1,0 +1,14 @@
+{
+  "name": "java-rookie",
+  "private": true,
+  "description": "Site statique pour apprendre les bases de Java (outils de vérification uniquement : le site lui-même n'a aucune dépendance).",
+  "scripts": {
+    "verifier": "node tools/verifier.mjs",
+    "manifeste": "node tools/manifeste.mjs",
+    "e2e": "node tools/e2e.cjs",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "playwright": "^1.50.0"
+  }
+}
