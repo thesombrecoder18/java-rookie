@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="t">
+  <title id="t">Java Rookie</title>
+  <!-- vapeur (café) -->
+  <g fill="none" stroke="#C0700F" stroke-width="3.2" stroke-linecap="round">
+    <path d="M24 19c-3.2-2.8 3.2-5.2 0-9"/>
+    <path d="M32 19c-3.2-2.8 3.2-5.2 0-9"/>
+    <path d="M40 19c-3.2-2.8 3.2-5.2 0-9"/>
+  </g>
+  <!-- tasse -->
+  <path d="M12 24h40v13a15 15 0 0 1-15 15h-10a15 15 0 0 1-15-15z" fill="#1D5E86"/>
+  <path d="M51 28.5h3.5a6.5 6.5 0 0 1 0 13H50" fill="none" stroke="#1D5E86" stroke-width="4.2" stroke-linecap="round"/>
+  <!-- accolades : le code dans la tasse -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M27 29.5c-2.6 0-3.2 1.2-3.2 3.2v1.6c0 1.6-.9 2.4-2.6 2.4c1.7 0 2.6.8 2.6 2.4v1.6c0 2 .6 3.2 3.2 3.2"/>
+    <path d="M37 29.5c2.6 0 3.2 1.2 3.2 3.2v1.6c0 1.6.9 2.4 2.6 2.4c-1.7 0-2.6.8-2.6 2.4v1.6c0 2-.6 3.2-3.2 3.2"/>
+  </g>
+  <!-- soucoupe -->
+  <path d="M8 57h44" stroke="#C0700F" stroke-width="3.2" stroke-linecap="round"/>
+</svg>

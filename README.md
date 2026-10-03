@@ -1,6 +1,10 @@
-# Java Rookie
+<p align="center">
+  <img src="assets/logo.svg" alt="Logo Java Rookie : une tasse dont le contenu est une paire d'accolades" width="120">
+</p>
 
-**Apprendre les bases de Java en partant de zéro, une petite leçon à la fois.**
+<h1 align="center">Java Rookie</h1>
+
+<p align="center"><strong>Apprendre les bases de Java en partant de zéro, une petite leçon à la fois.</strong></p>
 
 Java Rookie est un site pédagogique gratuit et autonome pour les débutants absolus. On y apprend **les bases de Java en environ 3 h**, en **27 petites leçons d'environ 7 minutes**, sans professeur à côté et sans se fatiguer.
 
@@ -120,6 +124,10 @@ Le contenu a aussi été relu par des agents spécialisés : une revue Java, un 
 4. Lancer `npm run verifier` (0 problème attendu), `node tools/mesure.mjs` et `npm run e2e`.
 
 Les sessions [Claude Code](https://claude.com/claude-code) qui reprennent le projet lisent [`CLAUDE.md`](CLAUDE.md) et [`docs/ETAT.md`](docs/ETAT.md). Le skill de projet `.claude/skills/lecon-java-rookie/` décrit la méthode pour écrire ou corriger une leçon.
+
+## Logo
+
+Le logo (`assets/logo.svg`) est une création originale du projet : une tasse, clin d'œil à Java, dont le contenu est une paire d'accolades `{ }` : du code. Il n'utilise pas le logo officiel de Java, qui est une marque déposée d'Oracle. Déclinaisons : `assets/favicon.svg` (onglet), `assets/apple-touch-icon.png` et `assets/icon-192.png` (écran d'accueil du téléphone), `assets/logo-512.png`.
 
 ## Licence
 
