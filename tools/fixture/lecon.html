@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leçon — Java Rookie</title>
+<meta name="description" content="Une leçon courte du parcours Java Rookie.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip" href="#principal">Aller au contenu</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="marque" href="index.html"><span class="marque-puce"></span>Java <span class="pas">Rookie</span></a>
+    <button class="menu-btn" aria-expanded="false" aria-label="Ouvrir le menu">Menu</button>
+    <nav class="nav-liens" aria-label="Navigation principale">
+      <a href="index.html">Parcours</a>
+      <a href="lexique.html">Lexique</a>
+      <a href="index.html#le-cours">Le cours</a>
+    </nav>
+  </div>
+</header>
+
+<main id="principal" class="page">
+  <aside class="sommaire" aria-label="Leçons du module">
+    <details class="sommaire-repli" open>
+      <summary>Leçons de ce module</summary>
+      <nav id="sommaire-module"></nav>
+      <label class="pref"><input type="checkbox" id="pref-simple"> Toujours ouvrir « Explique-moi simplement »</label>
+    </details>
+  </aside>
+  <script>
+    /* Présentation seulement : sur petit écran, le sommaire du module est replié pour que la leçon soit visible tout de suite. */
+    (function () {
+      var d = document.querySelector(".sommaire-repli"), mq = window.matchMedia("(max-width: 940px)");
+      function ajuster() { d.open = !mq.matches; }
+      ajuster();
+      if (mq.addEventListener) mq.addEventListener("change", ajuster);
+    })();
+  </script>
+  <article id="lecon" class="lecon" aria-live="polite">
+    <p class="mut">Chargement de la leçon…</p>
+  </article>
+</main>
+
+<footer class="pied">
+  <div class="pied-inner">
+    <div><strong>Java Rookie</strong> · Accompagne le cours « Programmation orientée-objet : Java » du Pr. Samba DIAW<br>Département Génie Informatique, ESP-UCAD, Dakar.</div>
+    <div><a href="index.html">Parcours</a> · <a href="lexique.html">Lexique</a><br><span class="mut">Ta progression est enregistrée dans ce navigateur.</span></div>
+  </div>
+</footer>
+<script src="../../assets/js/noyau.js"></script>
+<script src="../../assets/js/blocs.js"></script>
+<script src="../../assets/js/exercices.js"></script>
+<script src="../../assets/js/pages.js"></script>
+<script src="manifest-test.js"></script>
+</body>
+</html>
