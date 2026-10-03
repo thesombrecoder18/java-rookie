@@ -1,0 +1,8 @@
+{
+  "m01-premiers-pas": "Écrire, lancer et lire ton tout premier programme.",
+  "m02-variables": "Ranger des valeurs dans des boîtes étiquetées.",
+  "m03-calculer-dialoguer": "Faire calculer l'ordinateur et lire ce que tape l'utilisateur.",
+  "m04-choisir-repeter": "Faire des choix (if, switch) et répéter (for, while).",
+  "m05-methodes": "Découper ton programme en petites machines réutilisables.",
+  "m06-objets": "Penser objet : classes, objets, encapsulation, héritage."
+}
