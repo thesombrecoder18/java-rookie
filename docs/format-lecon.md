@@ -68,6 +68,10 @@ Tous les extraits Java sont compilés automatiquement par `tools/verifier.mjs` a
 
 `copier: false` : cache le bouton « Copier pour essayer » tout en gardant la vérification (ex. une classe seule, sans `main`, compilée avec `run: "fichier"`). Ne jamais utiliser `run: "aucun"` pour du Java valide : on perdrait la vérification.
 
+Le vérificateur contrôle aussi que :
+- chaque code `erreur` est refusé **pour la raison annoncée** : le début de `message` doit se retrouver dans la vraie sortie de `javac`/`java` ;
+- le `code` de départ d'un `exo` (non compilé, car parfois incomplet) a des `{}` `()` `[]` et des guillemets équilibrés, sauf pour un exercice de niveau `corriger` (faux volontairement, et affiché comme tel par le moteur).
+
 `contexte` : code invisible ajouté AVANT l'extrait (même mode), par exemple `int age = 20;` pour qu'un fragment comme `age = 21;` compile.
 Le vérificateur compile avec `javac --release 21` : n'utilise aucune nouveauté postérieure à Java 21.
 Les imports `java.util.*`, `java.time.*` et `java.time.format.*` sont ajoutés automatiquement aux extraits `main`/`classe` (mais montre l'`import` dans le code quand la leçon l'enseigne, en mode `fichier`).

@@ -17,6 +17,19 @@ const ARGS = process.argv.slice(2);
 const MONTRER_ERREURS = ARGS.includes("--erreurs");
 const filtre = ARGS.find((a) => !a.startsWith("--")) || "";
 const rapportErreurs = [];
+/* Le message annoncé (ex. « error: cannot find symbol » ou « Exception … InputMismatchException ») doit
+   se retrouver dans la sortie réelle de javac/java : on compare la partie significative de sa première ligne. */
+const toutesErreurs = (err) => err.split("\n").filter((l) => /error:/.test(l)).map((l) => l.replace(/^.*?error:\s*/, "").trim());
+function messageCorrespond(annonce, sortieReelle) {
+  const premiere = String(annonce).split("\n")[0];
+  const cle = premiere.replace(/^.*?error:\s*/, "").replace(/^Exception in thread "main"\s*/, "").replace(/[«»"]/g, "").trim();
+  if (!cle) return true;
+  const norm = (t) => t.replace(/[«»"]/g, "").replace(/\s+/g, " ").toLowerCase();
+  const reel = norm(sortieReelle);
+  /* tolère un message raccourci (… ou fin coupée) : on cherche les 25 premiers caractères significatifs */
+  const morceau = norm(cle.split(/…|\.\.\./)[0]).slice(0, 25).trim();
+  return reel.includes(morceau);
+}
 const premiereErreur = (err) => (err.split("\n").find((l) => /error:/.test(l)) || "").replace(/^.*?error:\s*/, "");
 const TEMP = fs.mkdtempSync(path.join(os.tmpdir(), "jr-verif-"));
 const PARALLELE = Math.max(2, Math.min(8, os.cpus().length));
@@ -139,7 +152,9 @@ function extraits({ data }) {
         ajouter(b, b.code, "erreur", undefined, ou);
         if (b.correction) ajouter({ ...b, run: b.runCorrection || corrigeMode(b.run) }, b.correction, "main", undefined, ou + " correction");
         break;
-      case "exo": if (b.corrige?.code) ajouter(b, b.corrige.code, "main", b.corrige.sortie, ou + " corrigé"); break;
+      case "exo":
+        if (b.code && b.niveau !== "corriger" && !equilibre(b.code)) signaler(data.id, `${ou} : code de départ de l'exercice déséquilibré ({} () [] ou guillemets)\n` + b.code);
+        if (b.corrige?.code) ajouter(b, b.corrige.code, "main", b.corrige.sortie, ou + " corrigé"); break;
       case "trous": ajouter(b, b.code.split("___").map((m, j, t) => m + (j < t.length - 1 ? [].concat(b.reponses[j])[0] : "")).join(""), "main", b.sortie, ou); break;
       case "ordre": ajouter(b, b.lignes.join("\n"), "main", b.sortie, ou); break;
       case "versions": b.etapes.forEach((v, j) => ajouter(b, v.code, "main", v.sortie, `${ou} v${j + 1}`)); break;
@@ -149,6 +164,17 @@ function extraits({ data }) {
   (data.sections || []).forEach((s, i) => parcourir(s.blocs || [], `section ${i + 1}`));
   parcourir(data.test || [], "test");
   return liste;
+}
+/* Vérifie que {} () [] sont équilibrés (hors chaînes, caractères et commentaires). */
+function equilibre(code) {
+  const sans = code.replace(/\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*'/g, "");
+  if (/["']/.test(sans)) return false;
+  const pile = [], paires = { ")": "(", "]": "[", "}": "{" };
+  for (const ch of sans) {
+    if ("([{".includes(ch)) pile.push(ch);
+    else if (paires[ch]) { if (pile.pop() !== paires[ch]) return false; }
+  }
+  return pile.length === 0;
 }
 function corrigeMode(run) {
   if (!run || run === "erreur" || run === "erreur-execution") return "main";
@@ -220,7 +246,11 @@ async function verifierExtrait(x) {
   const c = await lancer("javac", ["--release", "21", "-encoding", "UTF-8", "-Xlint:none", "-nowarn", p.fichier], { cwd: dir });
   if (p.estErreur && !p.execErreur) {
     if (c.code === 0) signaler(nom, "devait être REFUSÉ par javac, mais compile :\n" + x.code);
-    else if (MONTRER_ERREURS) rapportErreurs.push(`${nom}\n  annoncé : ${x.message}\n  javac   : ${premiereErreur(c.err)}`);
+    else {
+      if (x.message && !messageCorrespond(x.message, c.err))
+        signaler(nom, `refusé, mais PAS pour la raison annoncée (erreur involontaire dans le code ?)\n  annoncé : ${x.message}\n  javac   : ${toutesErreurs(c.err).join(" | ")}\n` + x.code);
+      if (MONTRER_ERREURS) rapportErreurs.push(`${nom}\n  annoncé : ${x.message}\n  javac   : ${premiereErreur(c.err)}`);
+    }
     return;
   }
   if (c.code !== 0) return signaler(nom, "ne compile pas :\n" + x.code + "\n--- javac ---\n" + c.err.split("\n").slice(0, 6).join("\n"));
@@ -228,6 +258,8 @@ async function verifierExtrait(x) {
   const r = await lancer("java", ["-Dfile.encoding=UTF-8", "-Dstdout.encoding=UTF-8", "-Duser.language=fr", "-Duser.country=FR", p.classe], { cwd: dir, entree: x.entree });
   if (p.execErreur) {
     if (r.code === 0) signaler(nom, "devait lever une exception à l'exécution, mais s'exécute normalement");
+    else if (x.message && !messageCorrespond(x.message, r.err))
+      signaler(nom, `plante, mais PAS avec l'exception annoncée\n  annoncé : ${x.message}\n  java    : ${r.err.split("\n").find((l) => /Exception|Error/.test(l))}`);
     else if (MONTRER_ERREURS) rapportErreurs.push(`${nom}\n  annoncé : ${x.message}\n  java    : ${r.err.split("\n").find((l) => /Exception|Error/.test(l)) || r.err.split("\n")[0]}`);
     return;
   }

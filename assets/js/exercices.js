@@ -261,7 +261,13 @@
     var cle = (JR.leconCourante || "?") + "#exo" + (++compteurExo);
     w.appendChild(el("span", "num niv-" + (b.niveau || "comprendre"), "Mini-exercice · " + (NIVEAUX[b.niveau] || "Pratique")));
     w.appendChild(el("p", null, b.enonce));
-    if (b.code) w.appendChild(JR.blocCode(b.code, { copie: JR.copiable(b) }));
+    /* Un exercice « corriger » montre un code volontairement faux : on le signale pour qu'il ne passe pas pour une coquille. */
+    var aCorriger = b.niveau === "corriger";
+    if (b.code) w.appendChild(JR.blocCode(b.code, {
+      copie: JR.copiable(b),
+      cls: aCorriger ? "faux" : null,
+      titre: aCorriger ? "Code à corriger (volontairement faux)" : null
+    }));
     if (b.indice) {
       var di = el("details", "indice");
       di.appendChild(el("summary", null, "Un indice ?"));

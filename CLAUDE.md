@@ -68,6 +68,7 @@ Prérequis : JDK 21 ou plus récent (`javac`) et Node. La première fois : `npm 
 - Les extraits sont compilés avec `--release 21` : pas de `main` simplifié, pas d'instruction avant `super(...)`.
 - En mode `main`, le vérificateur ajoute les imports `java.util`/`java.time` et `throws Exception`, sauf pour les blocs `erreur`.
 - OneCompiler (l'outil conseillé) tourne en Java 25 : aucun texte ni quiz ne doit dépendre de la version de Java.
+- Un code `erreur` doit échouer pour la raison annoncée (le vérificateur compare les messages). Un code volontairement faux en dehors d'un bloc `erreur` doit être un `exo` de niveau `corriger`.
 - Pas de sortie annoncée qui dépende de la machine (`LocalDate.now()`, `toString` par défaut, format des nombres selon la langue).
 - Scanner : champ `entree` pour le vérificateur. Virgule ou point selon la langue de la machine : formuler prudemment.
 - Les scripts des pages doivent charger `assets/js/*.js` AVANT `courses/manifest.js`.
